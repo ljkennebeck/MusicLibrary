@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	--- Search For Song ---<br>
+	<form th:action="@{/searchForSong}">
+		Title: <input name="title" size="20"><br>
+		Artist: <input name="artist" size="20"><br>
+		<input name="submit" type="submit" value="submit" />
+	</form>
+	--- List of Songs ---<br>
+	<form>
+		<tr th:each="currentSong: ${songs}">
+			<td th:text="${currentSong.title}" />
+			<td> --- </td>
+			<td th:text="${currentSong.artist}" />
+			<td> | </td>
+			<td><a th:href="@{/editSong/{id}(id=${currentSong.id})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deleteSong/{id}(id=${currentSong.id})}">Delete</a></td><br>
+		</tr>
+	</form>
+	<a href="/addSong">Add a New Song</a>
+</body>
+</html>
