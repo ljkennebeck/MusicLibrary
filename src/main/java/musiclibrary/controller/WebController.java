@@ -1,4 +1,4 @@
-package musiclibrary.controller;
+package musicLibrary.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import musiclibrary.beans.Song;
-import musiclibrary.repository.SongRepository;
+import musicLibrary.beans.Song;
+import musicLibrary.repository.SongRepository;
 
 /**
  * @authors Viktoriia Denys, Kaitlyn Briggs & Logan Kennebeck - vdenys, krbriggs & ljkennebeck1

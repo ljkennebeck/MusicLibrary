@@ -1,4 +1,4 @@
-package musiclibrary.beans;
+package musicLibrary.beans;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
