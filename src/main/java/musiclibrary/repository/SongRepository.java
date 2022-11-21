@@ -1,11 +1,11 @@
-package musicLibrary.repository;
+package musiclibrary.repository;
 
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import musicLibrary.beans.Song;
+import musiclibrary.beans.Song;
 
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {

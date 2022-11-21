@@ -3,7 +3,7 @@
  * CIS175 - Fall 2022
  * Nov 15, 2022
  */
-package musicLibrary.beans;
+package musiclibrary.beans;
 
 
 import java.util.List;
