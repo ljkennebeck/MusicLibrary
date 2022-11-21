@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
@@ -10,7 +9,8 @@
 	<form th:action="@{/searchForSong}">
 		Title: <input name="title" size="20"><br>
 		Artist: <input name="artist" size="20"><br>
-		<input name="submit" type="submit" value="submit" />
+		Genre: <input name="genre" size="20" ><br>
+		<input name="submit" type="submit" value="Submit" />
 	</form>
 	--- List of Songs ---<br>
 	<form>
@@ -18,6 +18,8 @@
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
 			<td th:text="${currentSong.artist}" />
+			<td> | </td>
+			<td th:text="${currentSong.genre}" />
 			<td> | </td>
 			<td><a th:href="@{/editSong/{id}(id=${currentSong.id})}">Edit</a></td>
 			<td> | </td>

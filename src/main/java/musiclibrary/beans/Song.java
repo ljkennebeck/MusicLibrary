@@ -27,16 +27,19 @@ public class Song {
 	private String title;
 	@Column(name="ARTIST")
 	private String artist;
+	@Column(name="GENRE")
+	private String genre;
 	
 	// Constructors
 	public Song() {
 		super();
 	}
 	
-	public Song(String title, String artist) {
+	public Song(String title, String artist, String Genre) {
 		super();
 		this.title = title;
 		this.artist = artist;
+		this.genre = genre;
 	}
 	
 	// Getters and Setters
@@ -58,6 +61,13 @@ public class Song {
 	}
 	public void setArtist(String artist) {
 		this.artist = artist;
+	}
+	
+	public String getGenre() {
+		return genre;
+	}
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	// Helper Methods

@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import musiclibrary.beans.Artist;
 
+
+
 public interface ArtistRepository extends JpaRepository<Artist, Long>{
 
 }
