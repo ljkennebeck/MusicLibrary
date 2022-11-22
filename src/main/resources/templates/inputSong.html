@@ -9,6 +9,7 @@
 	<form th:object="${newSong}" th:action="@{/updateSong/{id}/(id=${newSong.id})}" method='POST'>
 		Title: <input name="title" size="20" th:field="*{title}"><br>
 		Artist: <input name="artist" size="20" th:field="*{artist}"><br>
+		Genre: <input name="genre" size="20" th:field="*{genre}"><br>
 		
 		<input name="submit" type="submit" value="submit" />
 	</form>

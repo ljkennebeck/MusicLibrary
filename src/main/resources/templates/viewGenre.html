@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>View Genre</title>
+</head>
+<body>
+<h1>View Genre</h1>
+--- Search For Songs by Genre ---<br>
+	<form th:action="@{/searchForSongsByGenre}">
+		Genre: <input name="genre" size="20"><br>
+		<input name="submit" type="submit" value="submit" />
+	</form>
+<form th:object="${selectedGenre}" th:action="@{/view/{id}(id=${selectedGenre.id})}" method=POST>
+
+</body>
+</html>

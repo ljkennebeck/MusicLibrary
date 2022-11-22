@@ -12,6 +12,8 @@
 			<td> --- </td>
 			<td th:text="${currentSong.artist}" />
 			<td> | </td>
+			<td th:text="${currentSong.genre}" />
+			<td> | </td>
 			<td><a th:href="@{/editSong/{id}(id=${currentSong.id})}">Edit</a></td>
 			<td> | </td>
 			<td><a th:href="@{/deleteSong/{id}(id=${currentSong.id})}">Delete</a></td><br>

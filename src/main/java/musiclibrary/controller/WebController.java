@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import musiclibrary.beans.Genre;
 import musiclibrary.beans.Song;
 import musiclibrary.repository.SongRepository;
 
@@ -63,15 +64,19 @@ public class WebController {
 	}
 	
 	@GetMapping("/searchForSong")
-	public String searchForSong(@RequestParam(name = "title") String title, @RequestParam(name = "artist") String artist, Model model) {
-		return searchSong(title, artist, model);
+	public String searchForSong(@RequestParam(name = "title") String title, @RequestParam(name = "artist") String artist, @RequestParam(name = "genre") String genre, Model model) {
+		return searchSong(title, artist, genre, model);
 	}
 	
-	public String searchSong(String title, String artist, Model model) {
+	public String searchSong(String title, String artist, String genre, Model model) {
 		String path = "foundSongs";
 		List<Song> songs = new ArrayList<Song>();
-		if(title.equals("") && artist.equals("")) {
+		if(title.equals("") && artist.equals("") && genre.equals("")) {
 			return viewAllSongs(model);
+		}
+		else if(title.equals("") && artist.equals("")) {
+			songs = repo.findByGenre(genre);
+			model.addAttribute("foundSongs", songs);
 		}
 		else if(title.equals("")) {
 			songs = repo.findByArtist(artist);
@@ -87,5 +92,7 @@ public class WebController {
 		}
 		return path;
 	}
+		
+
 
 }
