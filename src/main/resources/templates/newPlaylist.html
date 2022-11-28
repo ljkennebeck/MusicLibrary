@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>New Playlist</title>
+</head>
+<body>
+	=== User <th th:text="${userInfo}"></th> ===<br>
+	<form th:object="${newPlaylist}" th:action="@{/updatePlaylist/{id}/(id=${newPlaylist.id})}" method='POST'>
+		Playlist Name: <input name="playlistName" size="20" th:field="*{playlistName}"><br>
+		
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Submit" />
+	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
+</body>
+</html>

@@ -23,7 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Playlist {
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	private String playlistName;
 	@Autowired
 	@OneToMany(targetEntity=Song.class)
@@ -53,11 +53,11 @@ public class Playlist {
 	}
 
 	// Getters and Setters
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

@@ -9,7 +9,7 @@
 --- Search For Songs by Genre ---<br>
 	<form th:action="@{/searchForSongsByGenre}">
 		Genre: <input name="genre" size="20"><br>
-		<input name="submit" type="submit" value="submit" />
+		<input name="submit" type="submit" value="Submit" />
 	</form>
 <form th:object="${selectedGenre}" th:action="@{/view/{id}(id=${selectedGenre.id})}" method=POST>
 

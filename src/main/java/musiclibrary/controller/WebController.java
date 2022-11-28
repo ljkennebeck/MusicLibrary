@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import musiclibrary.beans.Genre;
+import musiclibrary.beans.Playlist;
 import musiclibrary.beans.Song;
 import musiclibrary.beans.User;
+import musiclibrary.repository.PlaylistRepository;
 import musiclibrary.repository.SongRepository;
 import musiclibrary.repository.UserRepository;
 
@@ -28,6 +30,9 @@ import musiclibrary.repository.UserRepository;
 public class WebController {
 	@Autowired
 	SongRepository repo;
+	
+	@Autowired
+	PlaylistRepository repoP;
 	
 	@GetMapping("/viewAllSongs") //each of these mappings needs a userInfo param to keep track of the logged on user
 	public String viewAllSongs(@RequestParam("userInfo") String username, Model model) {
@@ -112,7 +117,48 @@ public class WebController {
 		model.addAttribute("userInfo", username);
 		return path;
 	}
-		
+	
+	@GetMapping("/viewAllPlaylists") 
+	public String viewAllPlaylists(@RequestParam("userInfo") String username, Model model) {
+		if(repoP.findAll().isEmpty()) {
+			return addNewPlaylist(username, model);
+		}
+		model.addAttribute("playlists", repoP.findAll());
+		model.addAttribute("userInfo", username);
+		return "profile";
+	}
+	
+	@GetMapping("/addPlaylist")
+	public String addNewPlaylist(@RequestParam("userInfo") String username, Model model) {
+		Playlist p = new Playlist();
+		model.addAttribute("newPlaylist", p);
+		model.addAttribute("userInfo", username);
+		return "newPlaylist";
+	}
+	
+	@GetMapping("/editPlaylist/{id}/{userInfo}")
+	public String showUpdatePlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Playlist p = repoP.findById(id).orElse(null);
+		model.addAttribute("newPlaylist", p);
+		model.addAttribute("userInfo", username);
+		return "newPlaylist";
+	}
+	
+	@PostMapping("/updatePlaylist/{id}")
+	public String updatePlaylist(@RequestParam("userInfo") String username, Playlist p, Model model) {
+		repoP.save(p);
+		model.addAttribute("userInfo", username);
+		return viewAllPlaylists(username, model);
+	}
+	
+	@GetMapping("/deletePlaylist/{id}/{userInfo}")
+	public String deletePlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Playlist p = repoP.findById(id).orElse(null);
+		repoP.delete(p);
+		model.addAttribute("userInfo", username);
+		return viewAllPlaylists(username, model);
+	}
+	
 	//------------------------------------------------------------------------------------------//
 	//------------------------------------------User Area---------------------------------------//
 	//------------------------------------------------------------------------------------------//
