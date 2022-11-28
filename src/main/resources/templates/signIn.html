@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign In Page</title>
+<script type = "text/javascript">
+	function validate(){
+		if(document.signIn.username.value == ""){
+			alert("Enter a Username");
+			document.signIn.username.focus();
+			return false;
+		}
+		if(document.signIn.password.value == ""){
+			alert("Enter a Password");
+			document.signIn.password.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+	<h1>Sign In</h1>
+	<form th:action="@{/signIn}" name="signIn" onsubmit="return(validate());">
+		Username: <input name="username" size="20"><th th:text="${errorMessage}"></th><br>
+		Password: <input name="password" size="20"><br>
+		
+		<input name="submit" type="submit" value="submit" />
+	</form>
+	<h3>New Here?</h3><a href="redirectSignUp">Sign Up</a>
+</body>
+</html>

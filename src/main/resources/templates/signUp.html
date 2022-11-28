@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Sign Up Page</title>
+<script type = "text/javascript">
+	function validate(){
+		if(document.createUser.password.value != document.createUser.pass.value){
+			alert("Passwords do not match");
+			document.createUser.pass.focus();
+			return false;
+		}
+		if(document.createUser.username.value == ""){
+			alert("Enter a Username");
+			document.createUser.username.focus();
+			return false;
+		}
+		if(document.createUser.password.value == ""){
+			alert("Enter a Password");
+			document.createUser.password.focus();
+			return false;
+		}
+		return true;
+	}
+</script>
+</head>
+<body>
+	<h1>Sign Up</h1>
+	<form th:action="@{/addUser}" name="createUser" onsubmit="return(validate());">
+		Username: <input name="username" size="20"><th th:text="${errorMessage}"></th><br>
+		Password: <input name="password" size="20"><br>
+		Verify Password: <input name="pass" size="20"><br>
+		
+		<input name="submit" type="submit" value="submit" />
+	</form>
+	<h3>Back to Sign In</h3><a href="redirectSignIn">Sign In</a>
+</body>
+</html>

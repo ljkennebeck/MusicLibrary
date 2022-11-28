@@ -6,12 +6,13 @@
 <title>Insert title here</title>
 </head>
 <body>
+	=== User <th th:text="${userInfo}"></th> ===<br>
 	<form>
 		<tr th:each="currentSong: ${foundSongs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
 			<td th:text="${currentSong.artist}" />
-			<td> | </td>
+			<td> --- </td>
 			<td th:text="${currentSong.genre}" />
 			<td> | </td>
 			<td><a th:href="@{/editSong/{id}(id=${currentSong.id})}">Edit</a></td>
@@ -19,7 +20,17 @@
 			<td><a th:href="@{/deleteSong/{id}(id=${currentSong.id})}">Delete</a></td><br>
 		</tr>
 	</form><br>
-	<a href="addSong">Add a New Song</a><br>
-	<a href="viewAllSongs">View All Songs</a>
+	<form th:action="@{/addSong}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Add a Song" /><br>
+	</form>
+	<form th:action="@{/viewAllSongs}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View all Songs" /><br>
+	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
 </body>
 </html>

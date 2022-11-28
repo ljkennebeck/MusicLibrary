@@ -6,13 +6,21 @@
 <title>Insert title here</title>
 </head>
 <body>
+	=== User <th th:text="${userInfo}"></th> ===<br>
 	<form th:object="${newSong}" th:action="@{/updateSong/{id}/(id=${newSong.id})}" method='POST'>
 		Title: <input name="title" size="20" th:field="*{title}"><br>
 		Artist: <input name="artist" size="20" th:field="*{artist}"><br>
 		Genre: <input name="genre" size="20" th:field="*{genre}"><br>
-		
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="submit" />
 	</form>
-	<a href="../viewAllSongs">View All Songs</a>
+	<form th:action="@{/viewAllSongs}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View all Songs" /><br>
+	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
 </body>
 </html>

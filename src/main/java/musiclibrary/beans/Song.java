@@ -1,13 +1,12 @@
 package musiclibrary.beans;
 
 import javax.persistence.Column;
+import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 /**
  * @authors Viktoriia Denys, Kaitlyn Briggs & Logan Kennebeck - vdenys, krbriggs & ljkennebeck1
@@ -15,6 +14,7 @@ import lombok.NoArgsConstructor;
  * Nov 16, 2022
  */
 @Entity
+@Embeddable
 @Table(name="songs")
 public class Song {
 	
@@ -30,18 +30,17 @@ public class Song {
 	@Column(name="GENRE")
 	private String genre;
 	
-	// Constructors
 	public Song() {
 		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public Song(String title, String artist, String Genre) {
+
+	public Song(String title, String artist, String genre) {
 		super();
 		this.title = title;
 		this.artist = artist;
 		this.genre = genre;
 	}
-	
 	// Getters and Setters
 	
 	public long getId() {
@@ -62,7 +61,6 @@ public class Song {
 	public void setArtist(String artist) {
 		this.artist = artist;
 	}
-	
 	public String getGenre() {
 		return genre;
 	}
@@ -70,9 +68,5 @@ public class Song {
 		this.genre = genre;
 	}
 
-	// Helper Methods
-	public String returnSongDetails( ) {
-		return this.title + ", by " + this.artist;
-	}
 
 }

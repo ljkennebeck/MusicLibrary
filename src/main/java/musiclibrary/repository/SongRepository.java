@@ -10,6 +10,8 @@ import musiclibrary.beans.Song;
 
 @Repository
 public interface SongRepository extends JpaRepository<Song, Long> {
+	
+	//these functions are auto created by the repo based on the given name
 
 	List<Song> findByTitle(String title);
 	
@@ -18,5 +20,11 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 	List<Song> findByGenre(String genre);
 	
 	List<Song> findByTitleAndArtist(String title, String artist);
+	
+	List<Song> findByTitleAndGenre(String title, String genre);
+	
+	List<Song> findByGenreAndArtist(String genre, String artist);
+	
+	List<Song> findByTitleAndArtistAndGenre(String title, String artist, String genre);
 			
 }
