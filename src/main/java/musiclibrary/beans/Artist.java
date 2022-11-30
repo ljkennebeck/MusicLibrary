@@ -40,6 +40,7 @@ public class Artist {
 	private String lastName;
 	@Column(name="bio")
 	private String bio;
-	//private List<Song> song;			
+	@OneToMany(targetEntity=Song.class)
+	private List<Song> songs;			
 
 }

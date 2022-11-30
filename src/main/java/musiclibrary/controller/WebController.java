@@ -41,6 +41,7 @@ public class WebController {
 		}
 		model.addAttribute("songs", repo.findAll());
 		model.addAttribute("userInfo", username);
+		model.addAttribute("playlists", repoP.findAll());
 		return "viewSongs";
 	}
 	
@@ -153,11 +154,23 @@ public class WebController {
 	
 	@GetMapping("/deletePlaylist/{id}/{userInfo}")
 	public String deletePlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		if(repoP.findById(id) == null) {
+			return "profile";
+		}
 		Playlist p = repoP.findById(id).orElse(null);
 		repoP.delete(p);
 		model.addAttribute("userInfo", username);
 		return viewAllPlaylists(username, model);
 	}
+	
+	@GetMapping("/viewPlaylist/{id}/{userInfo}") 
+	public String viewPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Playlist p = repoP.findById(id).orElse(null);
+		model.addAttribute("viewPlaylist", p);
+		model.addAttribute("userInfo", username);
+		return "viewPlaylist";
+	}
+	
 	
 	//------------------------------------------------------------------------------------------//
 	//------------------------------------------User Area---------------------------------------//

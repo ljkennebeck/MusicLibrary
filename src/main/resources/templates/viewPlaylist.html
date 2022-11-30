@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
 <title>View Playlist</title>
 </head>
 <body>
-
+<h1>View Playlist</h1>
+<form th:object="${viewPlaylist}" th:action="@{/viewPlaylist/{id}/{userInfo}(id=${viewPlaylist.id}, userInfo=${userInfo})}" method='POST'>
+	<h2 th:text="${viewPlaylist.playlistName}" />
+	
+</form>
 </body>
 </html>

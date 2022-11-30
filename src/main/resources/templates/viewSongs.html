@@ -25,7 +25,13 @@
 			<td> | </td>
 			<td><a th:href="@{/editSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Edit</a></td>
 			<td> | </td>
-			<td><a th:href="@{/deleteSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Delete</a></td><br>
+			<td><a th:href="@{/deleteSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Delete</a></td>
+			<td> | </td>
+			<td><label for="playlistsSelect" >Add To Playlist </label><select id="playlistsSelect" th:field="${playlists}">
+			<option value="0">Add to Playlist</option>
+			<option th:each="playlist : ${playlists}" th:value="${playlist.id}" th:text="${playlist.playlistName}"></option>
+			</select>
+			<br>
 		</tr>
 	</form>
 	<form th:action="@{/addSong}">
