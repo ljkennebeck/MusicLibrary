@@ -33,7 +33,7 @@ public class Artist {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private String id;
+	private long id;
 	@Column(name="artistName")
 	private String artistName;
 	@Column(name="bio")

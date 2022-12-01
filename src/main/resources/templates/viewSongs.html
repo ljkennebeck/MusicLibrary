@@ -31,6 +31,7 @@
 			<option value="0">Select Playlist</option>
 			<option th:each="playlist : ${playlists}" th:value="${playlist.id}" th:text="${playlist.playlistName}"></option>
 			</select>
+			<td> | </td>
 			<br>
 		</tr>
 	</form>

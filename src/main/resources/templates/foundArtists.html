@@ -8,7 +8,7 @@
 	=== User <th th:text="${userInfo}"></th> ===<br>
 	<form>
 		<tr th:each="currentArtist: ${foundArtists}">
-			<td th:text="${currentArtist.name}" />
+			<td th:text="${currentArtist.artistName}" />
 			<td> --- </td>
 			<td th:text="${currentArtist.bio}" />
 			<td> | </td>
@@ -17,9 +17,9 @@
 			<td><a th:href="@{/deleteArtist/{id}(id=${currentArtist.id})}">Delete</a></td><br>
 		</tr>
 	</form><br>
-	<form th:action="@{/addArtist}">
+	<form th:action="@{/viewAllArtists}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add an Artist" /><br>
+		<input name="submit" type="submit" value="View All Artists" /><br>
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />

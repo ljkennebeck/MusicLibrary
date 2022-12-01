@@ -10,7 +10,6 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import musiclibrary.beans.Artist;
-import musiclibrary.beans.Playlist;
 
 
 

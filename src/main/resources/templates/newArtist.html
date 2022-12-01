@@ -11,6 +11,7 @@
 	Bio: <input name="bio" size="40" th:field="*{bio}"><br>
 	<input name="userInfo" type="hidden" th:value="${userInfo}" />
 	<input name="submit" type="submit" value="Submit" /><br>
+</form>	
 	<form th:action="@{/viewAllArtists}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View All Artists" /><br>
@@ -23,6 +24,6 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Profile" /><br>
 	</form>
-</form>
+
 </body>
 </html>

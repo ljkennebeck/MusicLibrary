@@ -226,10 +226,10 @@ public class WebController {
 		if(repoA.findById(id) == null) {
 			return "viewAllArtists";
 		}
-		Playlist p = repoP.findById(id).orElse(null);
-		repoP.delete(p);
+		Artist a = repoA.findById(id).orElse(null);
+		repoA.delete(a);
 		model.addAttribute("userInfo", username);
-		return viewAllPlaylists(username, model);
+		return viewAllArtists(username, model);
 	}
 	
 	@GetMapping("/viewArtist/{id}/{userInfo}") 
