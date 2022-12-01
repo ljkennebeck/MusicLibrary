@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import musiclibrary.beans.Artist;
 import musiclibrary.beans.Genre;
 import musiclibrary.beans.Song;
 
@@ -23,7 +24,7 @@ public interface SongRepository extends JpaRepository<Song, Long> {
 	
 	List<Song> findByTitleAndGenre(String title, String genre);
 	
-	List<Song> findByGenreAndArtist(String genre, String artist);
+	List<Song> findByGenreAndArtist(String string, String string2);
 	
 	List<Song> findByTitleAndArtistAndGenre(String title, String artist, String genre);
 			

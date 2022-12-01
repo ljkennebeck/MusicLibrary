@@ -7,9 +7,12 @@
 <body>
 <h1>Artist Profile</h1>
 <form th:object="${selectedArtist}" th:action="@{/view/{id}(id=${selectedArtist.id})}" method=POST>
-<p name="firstName" size="20" th:field="*{firstName}"></p>
-<p name="lastName" size="20" th:field="*{lastName}"></p>
+<p name="artistName" size="20" th:field="*{artistName}"></p>
 <p name="bio" size="20" th:field="*{bio}"></p>
 </form>
+<form th:action="@{/newArtist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Add an Artist" /><br>
+	</form>
 </body>
 </html>

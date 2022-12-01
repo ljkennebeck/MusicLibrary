@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Artists</title>
+</head>
+<body>
+	=== User <th th:text="${userInfo}"></th> ===<br>
+	--- Search For Artist ---<br>
+	<form th:action="@{/searchForArtist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		Name: <input name="artistName" size="20"><br>
+		<input name="submit" type="submit" value="Submit" />
+	</form>
+	--- List of Artists ---<br>
+	<form>
+		<tr th:each="currentArtist: ${artists}">
+			<td th:text="${currentArtist.artistName}" />
+			<td> --- </td>
+			<td th:text="${currentArtist.bio}" />
+			<td> | </td>
+			<td><a th:href="@{/editArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deleteArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Delete</a></td>
+			<td> | </td>
+			<br>
+		</tr>
+	</form>
+</body>
+</html>

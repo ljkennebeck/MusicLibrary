@@ -9,8 +9,14 @@
 	=== User <th th:text="${userInfo}"></th> ===<br>
 	<form th:object="${newSong}" th:action="@{/updateSong/{id}/(id=${newSong.id})}" method='POST'>
 		Title: <input name="title" size="20" th:field="*{title}"><br>
-		Artist: <input name="artist" size="20" th:field="*{artist}"><br>
-		Genre: <input name="genre" size="20" th:field="*{genre}"><br>
+		<label for="artistSelect" >Artist: </label><select id="artistSelect" th:field="${artist}">
+			<option value="0">Select Artist</option>
+			<option th:each="artist : ${artist}" th:value="${artist.id}" th:text="${artist.artistName}"></option>
+			</select><br>
+		<label for="genreSelect" >Genre:  </label><select id="genreSelect" th:field="${genre}">
+			<option value="0">Select Genre</option>
+			<option th:each="genre : ${genre}" th:value="${genre.id}" th:text="${genre.genreName}"></option>
+			</select><br>
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Submit" />
 	</form>

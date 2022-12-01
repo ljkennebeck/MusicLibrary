@@ -28,7 +28,7 @@
 			<td><a th:href="@{/deleteSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Delete</a></td>
 			<td> | </td>
 			<td><label for="playlistsSelect" >Add To Playlist </label><select id="playlistsSelect" th:field="${playlists}">
-			<option value="0">Add to Playlist</option>
+			<option value="0">Select Playlist</option>
 			<option th:each="playlist : ${playlists}" th:value="${playlist.id}" th:text="${playlist.playlistName}"></option>
 			</select>
 			<br>
@@ -45,6 +45,10 @@
 	<form th:action="@{/viewProfile}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
+	<form th:action="@{/viewAllArtists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Artists" /><br>
 	</form>
 	<a href="/redirectSignIn">Sign Out</a>
 </body>

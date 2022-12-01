@@ -13,10 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import musiclibrary.beans.Artist;
 import musiclibrary.beans.Genre;
 import musiclibrary.beans.Playlist;
 import musiclibrary.beans.Song;
 import musiclibrary.beans.User;
+import musiclibrary.repository.ArtistRepository;
+import musiclibrary.repository.GenreRepository;
 import musiclibrary.repository.PlaylistRepository;
 import musiclibrary.repository.SongRepository;
 import musiclibrary.repository.UserRepository;
@@ -34,6 +37,14 @@ public class WebController {
 	@Autowired
 	PlaylistRepository repoP;
 	
+	@Autowired
+	ArtistRepository repoA;
+	
+	@Autowired
+	GenreRepository repoG;
+	
+	//Songs
+	
 	@GetMapping("/viewAllSongs") //each of these mappings needs a userInfo param to keep track of the logged on user
 	public String viewAllSongs(@RequestParam("userInfo") String username, Model model) {
 		if(repo.findAll().isEmpty()) {
@@ -50,6 +61,8 @@ public class WebController {
 		Song s = new Song();
 		model.addAttribute("newSong", s);
 		model.addAttribute("userInfo", username);
+		model.addAttribute("artist", repoA.findAll());
+		model.addAttribute("genre", repoG.findAll());
 		return "inputSong";
 	}
 	
@@ -77,8 +90,8 @@ public class WebController {
 	}
 	
 	@GetMapping("/searchForSong")
-	public String searchForSong(@RequestParam("userInfo") String username, @RequestParam(name = "title") String title, @RequestParam(name = "artist") String artist, @RequestParam(name = "genre") String genre, Model model) {
-		return searchSong(username, title, artist, genre, model);
+	public String searchForSong(@RequestParam("userInfo") String username, @RequestParam(name = "title") String title, @RequestParam(name = "artist") Artist artist, @RequestParam(name = "genre") Genre genre, Model model) {
+		return searchSong(username, title, artist.getArtistName(), genre.getGenreName(), model);
 	}
 	
 	public String searchSong(String username, String title, String artist, String genre, Model model) {
@@ -118,6 +131,8 @@ public class WebController {
 		model.addAttribute("userInfo", username);
 		return path;
 	}
+	
+	//Playlists
 	
 	@GetMapping("/viewAllPlaylists") 
 	public String viewAllPlaylists(@RequestParam("userInfo") String username, Model model) {
@@ -171,6 +186,78 @@ public class WebController {
 		return "viewPlaylist";
 	}
 	
+	//Artist
+	
+	@GetMapping("/viewAllArtists") 
+	public String viewAllArtists(@RequestParam("userInfo") String username, Model model) {
+		if(repoA.findAll().isEmpty()) {
+			return addNewArtist(username, model);
+		}
+		model.addAttribute("artists", repoA.findAll());
+		model.addAttribute("userInfo", username);
+		return "viewAllArtists";
+	}
+	
+	@GetMapping("/newArtist")
+	public String addNewArtist(@RequestParam("userInfo") String username, Model model) {
+		Artist a = new Artist();
+		model.addAttribute("newArtist", a);
+		model.addAttribute("userInfo", username);
+		return "newArtist";
+	}
+	
+	@GetMapping("/editArtist/{id}/{userInfo}")
+	public String showUpdateArtist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Artist a = repoA.findById(id).orElse(null);
+		model.addAttribute("newArtist", a);
+		model.addAttribute("userInfo", username);
+		return "newArtist";
+	}
+	
+	@PostMapping("/updateArtist/{id}")
+	public String updateArtist(@RequestParam("userInfo") String username, Artist a, Model model) {
+		repoA.save(a);
+		model.addAttribute("userInfo", username);
+		return viewAllArtists(username, model);
+	}
+	
+	@GetMapping("/deleteArtist/{id}/{userInfo}")
+	public String deleteArtist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		if(repoA.findById(id) == null) {
+			return "viewAllArtists";
+		}
+		Playlist p = repoP.findById(id).orElse(null);
+		repoP.delete(p);
+		model.addAttribute("userInfo", username);
+		return viewAllPlaylists(username, model);
+	}
+	
+	@GetMapping("/viewArtist/{id}/{userInfo}") 
+	public String viewArtist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Artist a = repoA.findById(id).orElse(null);
+		model.addAttribute("viewArtist", a);
+		model.addAttribute("userInfo", username);
+		return "viewArtist";
+	}
+	
+	@GetMapping("/searchForArtist")
+	public String searchForArtist(@RequestParam("userInfo") String username, @RequestParam(name = "artistName") String artistName, Model model) {
+		return searchArtist(username, artistName, model);
+	}
+	
+	public String searchArtist(String username, String artistName, Model model) {
+		String path = "foundArtists";
+		List<Artist> artists = new ArrayList<Artist>();
+		if(artistName.equals("")) {
+			return viewAllArtists(username, model);
+		}
+		else {
+			artists = repoA.findByArtistName(artistName);
+			model.addAttribute("foundArtists", artists);
+		}
+		model.addAttribute("userInfo", username);
+		return path;
+	}
 	
 	//------------------------------------------------------------------------------------------//
 	//------------------------------------------User Area---------------------------------------//
