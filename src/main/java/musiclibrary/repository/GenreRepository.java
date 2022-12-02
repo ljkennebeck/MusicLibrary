@@ -5,6 +5,8 @@
  */
 package musiclibrary.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import musiclibrary.beans.Genre;
@@ -14,5 +16,7 @@ import musiclibrary.beans.Genre;
  *
  */
 public interface GenreRepository extends JpaRepository<Genre, Long>{
+
+	List<Genre> findByGenreName(String genreName);
 
 }

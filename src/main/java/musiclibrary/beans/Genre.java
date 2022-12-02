@@ -34,7 +34,7 @@ import lombok.ToString;
 public class Genre {
 	@Id
 	@GeneratedValue
-	private int id;
+	private long id;
 	private String genreName;
 	@Autowired
 	@OneToMany(targetEntity=Song.class, mappedBy = "genre")

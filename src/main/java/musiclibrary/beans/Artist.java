@@ -34,9 +34,9 @@ public class Artist {
 	@GeneratedValue
 	@Column(name="ID")
 	private long id;
-	@Column(name="artistName")
+	@Column(name="NAME")
 	private String artistName;
-	@Column(name="bio")
+	@Column(name="BIO")
 	private String bio;
 	@OneToMany(targetEntity=Song.class, mappedBy = "artist")
 	private List<Song> songs;		

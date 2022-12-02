@@ -6,13 +6,38 @@
 </head>
 <body>
 <h1>Artist Profile</h1>
-<form th:object="${selectedArtist}" th:action="@{/view/{id}(id=${selectedArtist.id})}" method=POST>
-<p name="artistName" size="20" th:field="*{artistName}"></p>
-<p name="bio" size="20" th:field="*{bio}"></p>
-</form>
+<h2 th:text="${viewArtist.artistName}" />
+<h3>Songs by this Artist:</h3>
+<form>
+		<tr th:each="currentSong: ${foundSongs}">
+			<td th:text="${currentSong.title}" />
+			<td> --- </td>
+			<td th:text="${currentSong.genre}" />
+			<td> | </td>
+			
+			<br>
+		</tr>
+	</form>
+	<br>
 <form th:action="@{/newArtist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Add an Artist" /><br>
+	</form>
+	<form th:action="@{/viewAllArtists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View All Artists" /><br>
+	</form>
+	<form th:action="@{/viewAllPlaylists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Playlists" /><br>
+	</form>
+	<form th:action="@{/addPlaylist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Create Playlist" /><br>
+	</form>
+	<form th:action="@{/viewAllSongs}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Songs" /><br>
 	</form>
 </body>
 </html>

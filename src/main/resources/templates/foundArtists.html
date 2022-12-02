@@ -12,6 +12,8 @@
 			<td> --- </td>
 			<td th:text="${currentArtist.bio}" />
 			<td> | </td>
+			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
+			<td> | </td>
 			<td><a th:href="@{/editArtist/{id}(id=${currentArtist.id})}">Edit</a></td>
 			<td> | </td>
 			<td><a th:href="@{/deleteArtist/{id}(id=${currentArtist.id})}">Delete</a></td><br>

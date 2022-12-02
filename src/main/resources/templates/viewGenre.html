@@ -6,12 +6,17 @@
 </head>
 <body>
 <h1>View Genre</h1>
---- Search For Songs by Genre ---<br>
-	<form th:action="@{/searchForSongsByGenre}">
-		Genre: <input name="genre" size="20"><br>
-		<input name="submit" type="submit" value="Submit" />
+<h2 th:text="${viewGenre.genreName}" />
+<h3>Songs in this Genre:</h3>
+<form>
+		<tr th:each="currentSong: ${foundSongs}">
+			<td th:text="${currentSong.title}" />
+			<td> --- </td>
+			<td th:text="${currentSong.genre}" />
+			<td> | </td>
+			<br>
+		</tr>
 	</form>
-<form th:object="${selectedGenre}" th:action="@{/view/{id}(id=${selectedGenre.id})}" method=POST>
-
+	<br>
 </body>
 </html>

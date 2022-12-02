@@ -90,8 +90,8 @@ public class WebController {
 	}
 	
 	@GetMapping("/searchForSong")
-	public String searchForSong(@RequestParam("userInfo") String username, @RequestParam(name = "title") String title, @RequestParam(name = "artist") Artist artist, @RequestParam(name = "genre") Genre genre, Model model) {
-		return searchSong(username, title, artist.getArtistName(), genre.getGenreName(), model);
+	public String searchForSong(@RequestParam("userInfo") String username, @RequestParam(name = "title") String title, @RequestParam(name = "artist") String artist, @RequestParam(name = "genre") String genre, Model model) {
+		return searchSong(username, title, artist, genre, model);
 	}
 	
 	public String searchSong(String username, String title, String artist, String genre, Model model) {
@@ -235,6 +235,8 @@ public class WebController {
 	@GetMapping("/viewArtist/{id}/{userInfo}") 
 	public String viewArtist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
 		Artist a = repoA.findById(id).orElse(null);
+		a.setSongs(repo.findByArtist(a.getArtistName()));
+		model.addAttribute("foundSongs", a.getSongs());
 		model.addAttribute("viewArtist", a);
 		model.addAttribute("userInfo", username);
 		return "viewArtist";
@@ -254,6 +256,81 @@ public class WebController {
 		else {
 			artists = repoA.findByArtistName(artistName);
 			model.addAttribute("foundArtists", artists);
+		}
+		model.addAttribute("userInfo", username);
+		return path;
+	}
+	
+	//Genre
+	@GetMapping("/viewGenre/{id}/{userInfo}") 
+	public String viewGenre(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Genre g = repoG.findById(id).orElse(null);
+		g.setSongs(repo.findByGenre(g.getGenreName()));
+		model.addAttribute("foundSongs", g.getSongs());
+		model.addAttribute("viewGenre", g);
+		model.addAttribute("userInfo", username);
+		return "viewGenre";
+	}
+	
+	@GetMapping("/viewAllGenres") 
+	public String viewAllGenres(@RequestParam("userInfo") String username, Model model) {
+		if(repoA.findAll().isEmpty()) {
+			return addNewGenre(username, model);
+		}
+		model.addAttribute("genres", repoG.findAll());
+		model.addAttribute("userInfo", username);
+		return "viewAllGenres";
+	}
+	
+	@GetMapping("/newGenre")
+	public String addNewGenre(@RequestParam("userInfo") String username, Model model) {
+		Genre g = new Genre();
+		model.addAttribute("newGenre", g);
+		model.addAttribute("userInfo", username);
+		return "newGenre";
+	}
+	
+	@GetMapping("/editGenre/{id}/{userInfo}")
+	public String showUpdateGenre(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Genre g = repoG.findById(id).orElse(null);
+		model.addAttribute("newGenre", g);
+		model.addAttribute("userInfo", username);
+		return "newGenre";
+	}
+	
+	@PostMapping("/updateGenre/{id}")
+	public String updateArtist(@RequestParam("userInfo") String username, Genre g, Model model) {
+		repoG.save(g);
+		model.addAttribute("userInfo", username);
+		return viewAllGenres(username, model);
+	}
+	
+	@GetMapping("/deleteGenre/{id}/{userInfo}")
+	public String deleteGenre(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		if(repoG.findById(id) == null) {
+			return "viewAllGenres";
+		}
+		Genre g = repoG.findById(id).orElse(null);
+		repoG.delete(g);
+		model.addAttribute("userInfo", username);
+		return viewAllGenres(username, model);
+	}
+
+	
+	@GetMapping("/searchForGenre")
+	public String searchForGenre(@RequestParam("userInfo") String username, @RequestParam(name = "genreName") String genreName, Model model) {
+		return searchGenre(username, genreName, model);
+	}
+	
+	public String searchGenre(String username, String genreName, Model model) {
+		String path = "foundGenres";
+		List<Genre> genres = new ArrayList<Genre>();
+		if(genreName.equals("")) {
+			return viewAllArtists(username, model);
+		}
+		else {
+			genres = repoG.findByGenreName(genreName);
+			model.addAttribute("foundGenres", genres);
 		}
 		model.addAttribute("userInfo", username);
 		return path;

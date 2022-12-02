@@ -40,14 +40,10 @@ public class Song {
 	private long id;
 	@Column(name="TITLE")
 	private String title;
-	@Autowired
-	@ManyToOne
-    @JoinColumn(name = "artist_artistName")
-	private Artist artist;
-	@Autowired
-	@ManyToOne
-    @JoinColumn(name = "genre_genreName")
-	private Genre genre;
+	@Column(name="ARTIST")
+	private String artist;
+	@Column(name="GENRE")
+	private String genre;
 	
 	
 
