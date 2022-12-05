@@ -7,8 +7,18 @@
 <body>
 <h1>View Playlist</h1>
 <form th:object="${viewPlaylist}" th:action="@{/viewPlaylist/{id}/{userInfo}(id=${viewPlaylist.id}, userInfo=${userInfo})}" method='POST'>
-	<h2 th:text="${viewPlaylist.playlistName}" />
-	
+	<h2 th:text="${viewPlaylist.playlistName}" ></h2>
 </form>
+<form>
+		<tr th:each="currentSong: ${playlistSongs}">
+			<td th:text="${currentSong.title}" />
+			<td> --- </td>
+			<td th:text="${currentSong.artist}" />
+			<td> --- </td>
+			<td th:text="${currentSong.genre}" />
+			<td> | </td>
+	
+		</tr>
+	</form>
 </body>
 </html>

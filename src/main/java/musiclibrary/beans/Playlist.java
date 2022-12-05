@@ -1,9 +1,8 @@
 package musiclibrary.beans;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.persistence.Embeddable;
-//import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,23 +24,21 @@ public class Playlist {
 	@GeneratedValue
 	private long id;
 	private String playlistName;
-	@Autowired
-	@OneToMany(targetEntity=Song.class)
-	private List<Song> songs;
+	private ArrayList<Song> songs;
 	
 	// Constructors
 	public Playlist() {
 		super();
 	}
 	
-	public Playlist(int id, String playlistName, List<Song> songs) {
+	public Playlist(int id, String playlistName, ArrayList<Song> songs) {
 		super();
 		this.id = id;
 		this.playlistName = playlistName;
 		this.songs = songs;
 	}
 	
-	public Playlist(String playlistName, List<Song> songs) {
+	public Playlist(String playlistName, ArrayList<Song> songs) {
 		super();
 		this.playlistName = playlistName;
 		this.songs = songs;
@@ -69,11 +66,11 @@ public class Playlist {
 		this.playlistName = playlistName;
 	}
 	
-	public List<Song> getSongs() {
+	public ArrayList<Song> getSongs() {
 		return songs;
 	}
 
-	public void setSongs(List<Song> songs) {
+	public void setSongs(ArrayList<Song> songs) {
 		this.songs = songs;
 	}
 

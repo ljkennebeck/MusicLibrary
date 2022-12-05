@@ -88,6 +88,18 @@ public class WebController {
 		model.addAttribute("userInfo", username);
 		return viewAllSongs(username, model);
 	}
+	@GetMapping("/addToPlaylist")
+	public String addSongToPlaylist(@RequestParam("userInfo") String username, @RequestParam("id") long id, @RequestParam(name = "playlistId") long playlistId, Model model) {
+		if(playlistId == 0) {
+			return "viewAllSongs";
+		}else {
+		Playlist p = repoP.findById(playlistId).orElse(null);
+		Song s = repo.findById(id).orElse(null);
+		ArrayList<Song> playlistSongs = p.getSongs();
+		playlistSongs.add(s);
+		return "viewAllSongs";
+		}
+	}
 	
 	@GetMapping("/searchForSong")
 	public String searchForSong(@RequestParam("userInfo") String username, @RequestParam(name = "title") String title, @RequestParam(name = "artist") String artist, @RequestParam(name = "genre") String genre, Model model) {
@@ -181,7 +193,9 @@ public class WebController {
 	@GetMapping("/viewPlaylist/{id}/{userInfo}") 
 	public String viewPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
 		Playlist p = repoP.findById(id).orElse(null);
+		ArrayList<Song> songs = p.getSongs();
 		model.addAttribute("viewPlaylist", p);
+		model.addAttribute("playlistSongs", songs);
 		model.addAttribute("userInfo", username);
 		return "viewPlaylist";
 	}
