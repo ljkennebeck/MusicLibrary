@@ -5,7 +5,17 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 
 /**
@@ -16,6 +26,11 @@ import javax.persistence.Table;
 @Entity
 @Embeddable
 @Table(name="songs")
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Getter
+@Setter
 public class Song {
 	
 	// Variables
@@ -30,43 +45,7 @@ public class Song {
 	@Column(name="GENRE")
 	private String genre;
 	
-	public Song() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Song(String title, String artist, String genre) {
-		super();
-		this.title = title;
-		this.artist = artist;
-		this.genre = genre;
-	}
-	// Getters and Setters
 	
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getArtist() {
-		return artist;
-	}
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
 
 
 }

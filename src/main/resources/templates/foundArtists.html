@@ -1,28 +1,27 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Found Songs</title>
+<title>Found Artists</title>
 </head>
 <body>
 	=== User <th th:text="${userInfo}"></th> ===<br>
 	<form>
-		<tr th:each="currentSong: ${foundSongs}">
-			<td th:text="${currentSong.title}" />
+		<tr th:each="currentArtist: ${foundArtists}">
+			<td th:text="${currentArtist.artistName}" />
 			<td> --- </td>
-			<td th:text="${currentSong.artist}" />
-			<td> --- </td>
-			<td th:text="${currentSong.genre}" />
+			<td th:text="${currentArtist.bio}" />
 			<td> | </td>
-			<td><a th:href="@{/editSong/{id}(id=${currentSong.id})}">Edit</a></td>
+			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
 			<td> | </td>
-			<td><a th:href="@{/deleteSong/{id}(id=${currentSong.id})}">Delete</a></td><br>
+			<td><a th:href="@{/editArtist/{id}(id=${currentArtist.id})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deleteArtist/{id}(id=${currentArtist.id})}">Delete</a></td><br>
 		</tr>
 	</form><br>
-	<form th:action="@{/addSong}">
+	<form th:action="@{/viewAllArtists}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add a Song" /><br>
+		<input name="submit" type="submit" value="View All Artists" /><br>
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />

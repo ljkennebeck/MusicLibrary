@@ -1,11 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Profile</title>
 </head>
 <body>
 	<h1>Profile for User: <th th:text="${userInfo}"></th><br>
-	<h3>stuff</h3>
+	<h3>Playlists:</h3>
+	<form>
+		<tr th:each="currentPlaylist: ${playlists}">
+			<td th:text="${currentPlaylist.playlistName}" />
+			<td> --- </td>
+			<td> | </td>
+			<td><a th:href="@{/viewPlaylist/{id}/{userInfo}(id=${currentPlaylist.id}, userInfo=${userInfo})}">View</a></td>
+			<td> | </td>
+			<td><a th:href="@{/editPlaylist/{id}/{userInfo}(id=${currentPlaylist.id}, userInfo=${userInfo})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deletePlaylist/{id}/{userInfo}(id=${currentPlaylist.id}, userInfo=${userInfo})}">Delete</a></td><br>
+		</tr>
+	</form>
+	<form th:action="@{/viewAllPlaylists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Show Playlists" /><br>
+	</form>
+	<form th:action="@{/addPlaylist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Create Playlist" /><br>
+	</form>
+	<form th:action="@{/viewAllSongs}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Songs" /><br>
+	</form>
+	<br>
+	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>

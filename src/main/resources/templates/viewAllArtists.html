@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Artists</title>
+</head>
+<body>
+	=== User <th th:text="${userInfo}"></th> ===<br>
+	--- Search For Artist ---<br>
+	<form th:action="@{/searchForArtist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		Name: <input name="artistName" size="20"><br>
+		<input name="submit" type="submit" value="Submit" />
+	</form>
+	--- List of Artists ---<br>
+	<form>
+		<tr th:each="currentArtist: ${artists}">
+			<td th:text="${currentArtist.artistName}" />
+			<td> --- </td>
+			<td th:text="${currentArtist.bio}" />
+			<td> | </td>
+			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
+			<td> | </td>
+			<td><a th:href="@{/editArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deleteArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Delete</a></td>
+			<td> | </td>
+			<br>
+		</tr>
+	</form>
+	<form th:action="@{/newArtist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Add An Artist" /><br>
+	</form>
+	<form th:action="@{/viewAllPlaylists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Show Playlists" /><br>
+	</form>
+	<form th:action="@{/addPlaylist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Create Playlist" /><br>
+	</form>
+	<form th:action="@{/viewAllSongs}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Songs" /><br>
+	</form>
+	<form th:action="@{/viewAllGenres}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Genres" /><br>
+	</form>
+	<br>
+	<a href="/redirectSignIn">Sign Out</a>
+</body>
+</html>

@@ -33,13 +33,16 @@ public class Artist {
 	@Id
 	@GeneratedValue
 	@Column(name="ID")
-	private String id;
-	@Column(name="firstName")
-	private String firstName;
-	@Column(name="lastName")
-	private String lastName;
-	@Column(name="bio")
+	private long id;
+	@Column(name="NAME")
+	private String artistName;
+	@Column(name="BIO")
 	private String bio;
-	//private List<Song> song;			
+	@OneToMany(targetEntity=Song.class, mappedBy = "artist")
+	private List<Song> songs;		
+	
+	public Artist(String inputArtistName) {
+		this.artistName = inputArtistName;
+	}
 
 }

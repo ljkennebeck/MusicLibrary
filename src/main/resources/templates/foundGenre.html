@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Found Genres</title>
+</head>
+<body>
+=== User <th th:text="${userInfo}"></th> ===<br>
+	<form>
+		<tr th:each="currentGenre: ${foundGenres}">
+			<td th:text="${currentGenre.genreName}" />
+			<td> --- </td>
+			<td><a th:href="@{/viewGenre/{id}/{userInfo}(id=${currentGenre.id}, userInfo=${userInfo})}">View</a></td>
+			<td> | </td>
+			<td><a th:href="@{/editGenre/{id}(id=${currentGenre.id})}">Edit</a></td>
+			<td> | </td>
+			<td><a th:href="@{/deleteGenre/{id}(id=${currentGenre.id})}">Delete</a></td><br>
+		</tr>
+	</form><br>
+</body>
+</html>

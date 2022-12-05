@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import musiclibrary.beans.Artist;
 import musiclibrary.beans.Genre;
 import musiclibrary.beans.Song;
 

@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Input Song</title>
 </head>
 <body>
 	=== User <th th:text="${userInfo}"></th> ===<br>
@@ -12,7 +12,7 @@
 		Artist: <input name="artist" size="20" th:field="*{artist}"><br>
 		Genre: <input name="genre" size="20" th:field="*{genre}"><br>
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="submit" />
+		<input name="submit" type="submit" value="Submit" />
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
