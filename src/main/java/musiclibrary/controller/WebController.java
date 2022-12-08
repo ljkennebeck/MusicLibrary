@@ -90,9 +90,6 @@ public class WebController {
 	}
 	@GetMapping("/addToPlaylist")
 	public String addSongToPlaylist(@RequestParam("userInfo") String username, @RequestParam("id") long id, @RequestParam(name = "playlistId") long playlistId, Model model) {
-		if(playlistId == 0) {
-			return "viewAllSongs";
-		}else {
 		Playlist p = repoP.findById(playlistId).orElse(null);
 		Song s = repo.findById(id).orElse(null);
 		ArrayList<Song> playlistSongs = p.getSongs();
