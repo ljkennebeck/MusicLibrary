@@ -2,6 +2,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 <title>Sign In Page</title>
 <script type = "text/javascript">
 	function validate(){
@@ -20,13 +22,15 @@
 </script>
 </head>
 <body>
+<div id="container">
 	<h1>Sign In</h1>
-	<form th:action="@{/signIn}" name="signIn" onsubmit="return(validate());">
+	<form id="border" th:action="@{/signIn}" name="signIn" onsubmit="return(validate());">
 		Username: <input name="username" size="20"><th th:text="${errorMessage}"></th><br>
 		Password: <input name="password" size="20"><br>
 		
 		<input name="submit" type="submit" value="submit" />
 	</form>
+	</div>
 	<h3>New Here?</h3><a href="redirectSignUp">Sign Up</a>
 </body>
 </html>

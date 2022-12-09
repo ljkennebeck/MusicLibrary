@@ -3,10 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Found Artists</title>
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 </head>
 <body>
-	=== User <th th:text="${userInfo}"></th> ===<br>
-	<form>
+<div id="container">
+	<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+	<form id="border">
 		<tr th:each="currentArtist: ${foundArtists}">
 			<td th:text="${currentArtist.artistName}" />
 			<td> --- </td>
@@ -43,6 +46,7 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	</div>
 	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>

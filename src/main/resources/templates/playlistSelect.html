@@ -2,10 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 <title>Select a Playlist</title>
 </head>
 <body>
-<form>
+
+<div id="container">
+<h1>Select a Playlist</h1>
+<form id="border">
 	<tr th:each="playlist : ${playlists}"></option>
 		<td th:text="${playlist.playlistName}" />
 		<td> | </td>
@@ -34,6 +39,7 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	</div>
 	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>

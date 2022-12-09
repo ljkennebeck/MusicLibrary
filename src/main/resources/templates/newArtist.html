@@ -3,10 +3,13 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>New Artist</title>
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 </head>
 <body>
-=== User <th th:text="${userInfo}"></th> ===<br>
-<form th:object="${newArtist}" th:action="@{/updateArtist/{id}/(id=${newArtist.id})}" method='POST'>
+<div id="container">
+<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+<form id="border" th:object="${newArtist}" th:action="@{/updateArtist/{id}/(id=${newArtist.id})}" method='POST'>
 	Name: <input name="artistName" size="20" th:field="*{artistName}"><br>
 	Bio: <input name="bio" size="40" th:field="*{bio}"><br>
 	<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -36,6 +39,7 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	</div>
 	<a href="/redirectSignIn">Sign Out</a>
 
 </body>

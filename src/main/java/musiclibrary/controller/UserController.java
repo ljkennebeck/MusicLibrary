@@ -39,6 +39,8 @@ public class UserController {
 	@Autowired
 	GenreRepository repoG;
 	
+	@Autowired
+	SongController controller;
 	
 	//------------------------------------------------------------------------------------------//
 	//------------------------------------------User Area---------------------------------------//
@@ -76,7 +78,7 @@ public class UserController {
 		else {
 			User u = new User(username, password);
 			model.addAttribute("userInfo", u.getUsername());
-			return "viewAllSongs";
+			return this.controller.viewAllSongs(username, model);
 		}
 	}
 	
@@ -92,7 +94,7 @@ public class UserController {
 			User newUser = new User(username, password);
 			uRepo.save(newUser);
 			model.addAttribute("userInfo", newUser.getUsername());
-			return "viewAllSongs";
+			return this.controller.viewAllSongs(username, model);
 		}
 	}
 

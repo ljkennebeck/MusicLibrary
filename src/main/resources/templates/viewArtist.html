@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 <title>Artist Profile</title>
 </head>
 <body>
+<div id="container">
 <h1>Artist Profile</h1>
 <h2 th:text="${viewArtist.artistName}" />
 <h3>Songs by this Artist:</h3>
-<form>
+<form id="border">
 		<tr th:each="currentSong: ${foundSongs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
@@ -47,6 +50,7 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	</div>
 	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>
