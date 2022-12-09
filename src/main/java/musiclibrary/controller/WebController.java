@@ -88,14 +88,34 @@ public class WebController {
 		model.addAttribute("userInfo", username);
 		return viewAllSongs(username, model);
 	}
-	@GetMapping("/addToPlaylist")
-	public String addSongToPlaylist(@RequestParam("userInfo") String username, @RequestParam("id") long id, @RequestParam(name = "playlistId") long playlistId, Model model) {
+	@GetMapping("/addToPlaylist/{id}/{userInfo}/{playlistId}")
+	public String addSongToPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, @PathVariable(name = "playlistId") long playlistId, Model model) {
 		Playlist p = repoP.findById(playlistId).orElse(null);
 		Song s = repo.findById(id).orElse(null);
-		ArrayList<Song> playlistSongs = p.getSongs();
-		playlistSongs.add(s);
-		return "viewAllSongs";
+		ArrayList<Song> playlistSongs = new ArrayList<Song>();
+		if(p.getSongs() == null) {
+			playlistSongs.add(s);
+			p.setSongs(playlistSongs);
+			repoP.save(p);
+			return viewAllSongs(username, model);
+		}else {
+			playlistSongs.addAll(p.getSongs());
+			playlistSongs.add(s);
+			p.setSongs(playlistSongs);
+			repoP.save(p);
+			return "viewAllSongs";
 		}
+	}
+	
+	@GetMapping("/selectPlaylist/{id}/{userInfo}") 
+	public String SelectPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		if(repoP.findAll().isEmpty()) {
+			return "viewAllSongs";
+		}
+		model.addAttribute("playlists", repoP.findAll());
+		model.addAttribute("userInfo", username);
+		model.addAttribute("id", id);
+		return "playlistSelect";
 	}
 	
 	@GetMapping("/searchForSong")

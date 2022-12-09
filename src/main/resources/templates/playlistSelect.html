@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Select a Playlist</title>
+</head>
+<body>
+<form>
+	<tr th:each="playlist : ${playlists}"></option>
+		<td th:text="${playlist.playlistName}" />
+		<td> | </td>
+		<td><td><a th:href="@{/addToPlaylist/{id}/{userInfo}/{playlistId} (id=${id}, userInfo=${userInfo}, playlistId=${playlist.id})}">Add Song To Playlist</a></td>
+		<td><br>
+	</tr>
+</form>
+</body>
+</html>

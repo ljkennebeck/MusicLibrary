@@ -4,24 +4,6 @@
 	<meta charset="ISO-8859-1">
 	<title>View Songs</title>
 	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
-<script>
-
-	function checkIfNull(){
-		if(document.songList.userId.value == null){
-			alert("Playlist not selected");
-			return false;
-		}
-		if(document.songList.playlistId.value == null || document.songList.playlistId.value == 0){
-			alert("Playlist not selected");
-			return false;
-		}
-		return true;
-		
-	}
-
-
-
-</script>
 </head>
 <body>
 	=== User <th th:text="${userInfo}"></th> ===<br>
@@ -34,7 +16,7 @@
 		<input name="submit" type="submit" value="Submit" />
 	</form>
 	--- List of Songs ---<br>
-	<form th:action="@{/addToPlaylist}" name="songList">
+	<form name="songList">
 		<tr th:each="currentSong : ${songs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
@@ -46,18 +28,7 @@
 			<td> | </td>
 			<td><a th:href="@{/deleteSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Delete</a></td>
 			<td> | </td>
-			<td><label for="playlistsSelect" >Add To Playlist </label>
-			<td><select id="playlistsSelect" name="playlistsSelect" th:field="${playlists}">
-				<option value="0" selected>Select Playlist</option>
-				<option th:each="playlist : ${playlists}" th:value="${playlist.id}" th:text="${playlist.playlistName}"></option>
-			</select>
-			</td>
-			<td> | </td>
-			<td><input name="userInfo" type="hidden" th:value="${userInfo}" /></td>
-			<td><input name="playlistId" type="hidden" th:value="${playlistsSelect.index.id}" /></td>
-			<td><input name="id" type="hidden" th:value="${currentSong.id}" /></td>
-			
-			<td><button type="submit" onclick="checkIfNull()">Add to Playlist</button></td>
+			<td><a th:href="@{/selectPlaylist/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Add To Playlist</a></td>
 			<td><br>
 		</tr>
 	</form>
