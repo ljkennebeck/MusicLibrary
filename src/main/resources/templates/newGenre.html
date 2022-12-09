@@ -11,9 +11,9 @@
 	<input name="userInfo" type="hidden" th:value="${userInfo}" />
 	<input name="submit" type="submit" value="Submit" /><br>
 </form>	
-	<form th:action="@{/viewAllPlaylists}">
+	<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Show Playlists" /><br>
+		<input name="submit" type="submit" value="Add a Song" /><br>
 	</form>
 	<form th:action="@{/addPlaylist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -21,7 +21,11 @@
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View Songs" /><br>
+		<input name="submit" type="submit" value="View All Songs" /><br>
+	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
 	</form>
 	<form th:action="@{/viewAllArtists}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -31,5 +35,6 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>
