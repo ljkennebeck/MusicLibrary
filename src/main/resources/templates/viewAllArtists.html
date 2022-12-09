@@ -2,18 +2,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 <title>Artists</title>
 </head>
 <body>
-	=== User <th th:text="${userInfo}"></th> ===<br>
-	--- Search For Artist ---<br>
-	<form th:action="@{/searchForArtist}">
+<div id="container">
+	<h1>=== User <th th:text="${userInfo}"></th> </h1>===<br>
+	<h2>--- Search For Artist ---</h2><br>
+	<form id="border" th:action="@{/searchForArtist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		Name: <input name="artistName" size="20"><br>
 		<input name="submit" type="submit" value="Submit" />
 	</form>
 	--- List of Artists ---<br>
-	<form>
+	<form id="border">
 		<tr th:each="currentArtist: ${artists}">
 			<td th:text="${currentArtist.artistName}" />
 			<td> --- </td>
@@ -28,13 +31,9 @@
 			<br>
 		</tr>
 	</form>
-	<form th:action="@{/newArtist}">
+<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add An Artist" /><br>
-	</form>
-	<form th:action="@{/viewAllPlaylists}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Show Playlists" /><br>
+		<input name="submit" type="submit" value="Add a Song" /><br>
 	</form>
 	<form th:action="@{/addPlaylist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -42,13 +41,21 @@
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View Songs" /><br>
+		<input name="submit" type="submit" value="View All Songs" /><br>
+	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
+	<form th:action="@{/viewAllArtists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Artists" /><br>
 	</form>
 	<form th:action="@{/viewAllGenres}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
-	<br>
+	</div>
 	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>

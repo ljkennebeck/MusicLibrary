@@ -4,37 +4,28 @@
 <meta charset="ISO-8859-1">
 <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
 	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
-<title>View Genre</title>
+<title>Select a Playlist</title>
 </head>
 <body>
+
 <div id="container">
-<h1>View Genre</h1>
-<h2 th:text="${viewGenre.genreName}" />
-<h3>Songs in this Genre:</h3>
+<h1>Select a Playlist</h1>
 <form id="border">
-		<tr th:each="currentSong: ${foundSongs}">
-			<td th:text="${currentSong.title}" />
-			<td> --- </td>
-			<td th:text="${currentSong.genre}" />
-			<td> | </td>
-			<br>
-		</tr>
-	</form>
-	<form th:action="@{/addSong}">
+	<tr th:each="playlist : ${playlists}"></option>
+		<td th:text="${playlist.playlistName}" />
+		<td> | </td>
+		<td><td><a th:href="@{/addToPlaylist/{id}/{userInfo}/{playlistId} (id=${id}, userInfo=${userInfo}, playlistId=${playlist.id})}">Add Song To Playlist</a></td>
+		<td><br>
+	</tr>
+	
+</form>
+<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Add a Song" /><br>
 	</form>
 	<form th:action="@{/addPlaylist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Create Playlist" /><br>
-	</form>
-	<form th:action="@{/newGenre}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add a Genre" /><br>
-	</form>
-	<form th:action="@{/viewAllSongs}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View All Songs" /><br>
 	</form>
 	<form th:action="@{/viewProfile}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -50,6 +41,5 @@
 	</form>
 	</div>
 	<a href="/redirectSignIn">Sign Out</a>
-	<br>
 </body>
 </html>

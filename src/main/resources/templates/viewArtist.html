@@ -2,13 +2,16 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="ISO-8859-1">
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 <title>Artist Profile</title>
 </head>
 <body>
+<div id="container">
 <h1>Artist Profile</h1>
 <h2 th:text="${viewArtist.artistName}" />
 <h3>Songs by this Artist:</h3>
-<form>
+<form id="border">
 		<tr th:each="currentSong: ${foundSongs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
@@ -23,13 +26,9 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Add an Artist" /><br>
 	</form>
-	<form th:action="@{/viewAllArtists}">
+	<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View All Artists" /><br>
-	</form>
-	<form th:action="@{/viewAllPlaylists}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View Playlists" /><br>
+		<input name="submit" type="submit" value="Add a Song" /><br>
 	</form>
 	<form th:action="@{/addPlaylist}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -37,7 +36,21 @@
 	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View Songs" /><br>
+		<input name="submit" type="submit" value="View All Songs" /><br>
 	</form>
+	<form th:action="@{/viewProfile}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Profile" /><br>
+	</form>
+	<form th:action="@{/viewAllArtists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Artists" /><br>
+	</form>
+	<form th:action="@{/viewAllGenres}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Genres" /><br>
+	</form>
+	</div>
+	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>

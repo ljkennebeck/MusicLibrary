@@ -1,5 +1,7 @@
 package musiclibrary.beans;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.Entity;
@@ -31,7 +33,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Song {
+public class Song implements Serializable{
 	
 	// Variables
 	@Id

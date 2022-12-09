@@ -4,23 +4,44 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Input Song</title>
+<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
 </head>
 <body>
-	=== User <th th:text="${userInfo}"></th> ===<br>
-	<form th:object="${newSong}" th:action="@{/updateSong/{id}/(id=${newSong.id})}" method='POST'>
+<div id="container">
+	<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+	<form id="border" th:object="${newSong}" th:action="@{/updateSong/{id}/(id=${newSong.id})}" method='POST'>
 		Title: <input name="title" size="20" th:field="*{title}"><br>
 		Artist: <input name="artist" size="20" th:field="*{artist}"><br>
 		Genre: <input name="genre" size="20" th:field="*{genre}"><br>
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Submit" />
 	</form>
+	<form th:action="@{/addSong}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Add a Song" /><br>
+	</form>
+	<form th:action="@{/addPlaylist}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Create Playlist" /><br>
+	</form>
 	<form th:action="@{/viewAllSongs}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="View all Songs" /><br>
+		<input name="submit" type="submit" value="View All Songs" /><br>
 	</form>
 	<form th:action="@{/viewProfile}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Profile" /><br>
 	</form>
+	<form th:action="@{/viewAllArtists}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Artists" /><br>
+	</form>
+	<form th:action="@{/viewAllGenres}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="View Genres" /><br>
+	</form>
+	</div>
+	<a href="/redirectSignIn">Sign Out</a>
 </body>
 </html>
