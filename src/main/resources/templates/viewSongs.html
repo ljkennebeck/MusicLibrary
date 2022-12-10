@@ -5,6 +5,7 @@
 	<title>View Songs</title>
 	<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
 	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
+	
 </head>
 <body>
 <div id="container">
@@ -31,7 +32,8 @@
 			<td><a th:href="@{/deleteSong/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Delete</a></td>
 			<td> | </td>
 			<td><a th:href="@{/selectPlaylist/{id}/{userInfo}(id=${currentSong.id}, userInfo=${userInfo})}">Add To Playlist</a></td>
-			<td><br>
+			<td>
+			<br>
 		</tr>
 	</form>
 	<form th:action="@{/addSong}">
