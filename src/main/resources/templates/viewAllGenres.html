@@ -29,6 +29,10 @@
 			<br>
 		</tr>
 	</form>
+	<form th:action="@{/newGenre}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Add a Genre" /><br>
+	</form>
 	<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="Add a Song" /><br>

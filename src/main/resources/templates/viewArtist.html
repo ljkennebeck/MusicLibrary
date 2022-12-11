@@ -10,6 +10,8 @@
 <div id="container">
 <h1>Artist Profile</h1>
 <h2 th:text="${viewArtist.artistName}" />
+<h3>About this Artist: </h3>
+<p th:text="${viewArtist.bio}"></p>
 <h3>Songs by this Artist:</h3>
 <form id="border">
 		<tr th:each="currentSong: ${foundSongs}">

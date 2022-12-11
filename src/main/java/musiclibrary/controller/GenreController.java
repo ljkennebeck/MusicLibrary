@@ -104,7 +104,7 @@ public class GenreController {
 		String path = "foundGenres";
 		List<Genre> genres = new ArrayList<Genre>();
 		if(genreName.equals("")) {
-			return "/viewAllSongs";
+			return viewAllGenres(username, model);
 		}
 		else {
 			genres = repoG.findByGenreName(genreName);

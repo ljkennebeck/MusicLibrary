@@ -55,12 +55,14 @@ h1{
 input:hover{
 	background-color:#79a5b8;
 }
+
 a:link {
   color:#2d2d2e;
 }
 a:visited {
   color:#2d2d2e;
 }
+
 a:hover {
   color:#414142;
 }

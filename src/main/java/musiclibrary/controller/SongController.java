@@ -92,11 +92,9 @@ public class SongController {
 			repoP.save(p);
 			return viewAllSongs(username, model);
 		}else {
-			playlistSongs.addAll(p.getSongs());
-			playlistSongs.add(s);
-			p.setSongs(playlistSongs);
+			p.addToPlaylist(s);
 			repoP.save(p);
-			return "viewAllSongs";
+			return viewAllSongs(username, model);
 		}
 	}
 	
