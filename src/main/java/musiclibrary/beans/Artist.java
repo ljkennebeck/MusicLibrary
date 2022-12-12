@@ -40,50 +40,5 @@ public class Artist {
 	private String bio;
 	@OneToMany(targetEntity=Song.class, mappedBy = "artist")
 	private List<Song> songs;		
-	
-	public Artist(String inputArtistName) {
-		this.artistName = inputArtistName;
-	}
-
-	public Artist() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-
-	public String getArtistName() {
-		return artistName;
-	}
-
-	public void setArtistName(String artistName) {
-		this.artistName = artistName;
-	}
-
-	public String getBio() {
-		return bio;
-	}
-
-	public void setBio(String bio) {
-		this.bio = bio;
-	}
-
-	public List<Song> getSongs() {
-		return songs;
-	}
-
-	public void setSongs(List<Song> songs) {
-		this.songs = songs;
-	}
-
-	
-	
-	
 
 }

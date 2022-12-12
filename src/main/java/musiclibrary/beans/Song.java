@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,13 +28,14 @@ import lombok.ToString;
  */
 @Entity
 @Embeddable
+@Data
 @Table(name="songs")
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
 @Getter
 @Setter
-public class Song implements Serializable{
+public class Song{
 	
 	// Variables
 	@Id
@@ -49,29 +51,4 @@ public class Song implements Serializable{
 	public long getId() {
 		return id;
 	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getArtist() {
-		return artist;
-	}
-	public void setArtist(String artist) {
-		this.artist = artist;
-	}
-	public String getGenre() {
-		return genre;
-	}
-	public void setGenre(String genre) {
-		this.genre = genre;
-	}
-	
-	
-
-
 }

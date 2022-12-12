@@ -27,42 +27,4 @@ public class Review {
 	private String user;
 	private String title;
 	private String message;
-	public Review() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public Review(String user, String title, String message) {
-		super();
-		this.user = user;
-		this.title = title;
-		this.message = message;
-	}
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getUser() {
-		return user;
-	}
-	public void setUser(String user) {
-		this.user = user;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public String getMessage() {
-		return message;
-	}
-	public void setMessage(String message) {
-		this.message = message;
-	}
-	
-	
-	
-
 }

@@ -112,7 +112,7 @@ public class SongController {
 	@GetMapping("/selectPlaylist/{id}/{userInfo}") 
 	public String SelectPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
 		if(repoP.findByUser(username).isEmpty()) {
-			return "viewAllSongs";
+			return viewAllSongs(username, model);
 		}
 		model.addAttribute("playlists", repoP.findByUser(username));
 		model.addAttribute("userInfo", username);

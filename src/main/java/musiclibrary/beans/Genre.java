@@ -39,35 +39,6 @@ public class Genre {
 	@Autowired
 	@OneToMany(targetEntity=Song.class, mappedBy = "genre")
 	private List<Song> songs;
-	public long getId() {
-		return id;
-	}
-	
-	public Genre() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Genre(String genreName) {
-		super();
-		this.genreName = genreName;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	public String getGenreName() {
-		return genreName;
-	}
-	public void setGenreName(String genreName) {
-		this.genreName = genreName;
-	}
-	public List<Song> getSongs() {
-		return songs;
-	}
-	public void setSongs(List<Song> songs) {
-		this.songs = songs;
-	}
 	
 	
 	
