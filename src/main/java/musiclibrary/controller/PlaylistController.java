@@ -37,10 +37,10 @@ public class PlaylistController {
 	
 	@GetMapping("/viewAllPlaylists") 
 	public String viewAllPlaylists(@RequestParam("userInfo") String username, Model model) {
-		if(repoP.findAll().isEmpty()) {
+		if(repoP.findByUser(username).isEmpty()) {
 			return addNewPlaylist(username, model);
 		}
-		model.addAttribute("playlists", repoP.findAll());
+		model.addAttribute("playlists", repoP.findByUser(username));
 		model.addAttribute("userInfo", username);
 		return "profile";
 	}
@@ -63,6 +63,7 @@ public class PlaylistController {
 	
 	@PostMapping("/updatePlaylist/{id}")
 	public String updatePlaylist(@RequestParam("userInfo") String username, Playlist p, Model model) {
+		p.setUser(username);
 		repoP.save(p);
 		model.addAttribute("userInfo", username);
 		return viewAllPlaylists(username, model);
@@ -88,6 +89,4 @@ public class PlaylistController {
 		model.addAttribute("userInfo", username);
 		return "viewPlaylist";
 	}
-	
-
 }

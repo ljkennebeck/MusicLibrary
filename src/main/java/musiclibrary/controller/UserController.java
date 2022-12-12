@@ -11,12 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import musiclibrary.beans.Review;
+import musiclibrary.beans.Song;
 import musiclibrary.beans.User;
 import musiclibrary.repository.ArtistRepository;
 import musiclibrary.repository.GenreRepository;
 import musiclibrary.repository.PlaylistRepository;
+import musiclibrary.repository.ReviewRepository;
 import musiclibrary.repository.SongRepository;
 import musiclibrary.repository.UserRepository;
 
@@ -31,6 +36,9 @@ public class UserController {
 	SongRepository repo;
 	
 	@Autowired
+	UserRepository repoU;
+	
+	@Autowired
 	PlaylistRepository repoP;
 	
 	@Autowired
@@ -38,6 +46,9 @@ public class UserController {
 	
 	@Autowired
 	GenreRepository repoG;
+	
+	@Autowired
+	ReviewRepository repoR;
 	
 	@Autowired
 	SongController controller;
@@ -83,7 +94,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/addUser")
-	public String addUser(@RequestParam("username") String username, @RequestParam("password")String password, Model model) {
+	public String addUser(@RequestParam("username") String username, @RequestParam("password")String password, @RequestParam("devCode") String devCode, Model model) {
 		String errorMessage = "Username Taken";
 		List<User> foundUser = uRepo.findByUsername(username);
 		if(!foundUser.isEmpty()) {
@@ -92,10 +103,57 @@ public class UserController {
 		}
 		else {
 			User newUser = new User(username, password);
+			if(devCode.equals("horseshoe")) {//developer code on sign up == horseshoe
+				newUser.setDev(true);
+			}
+			else {
+				newUser.setDev(false);
+			}
 			uRepo.save(newUser);
 			model.addAttribute("userInfo", newUser.getUsername());
 			return this.controller.viewAllSongs(username, model);
 		}
+	}
+	
+	@GetMapping("/addReview")
+	public String addReview(@RequestParam("userInfo") String username, Model model) {
+		Review r = new Review();
+		model.addAttribute("newReview", r);
+		model.addAttribute("userInfo", username);
+		return "submitReview";
+	}
+	
+	@PostMapping("/postReview/{id}")
+	public String postReview(@RequestParam("userInfo") String username, Review r, Model model) {
+		r.setUser(username);
+		repoR.save(r);
+		model.addAttribute("userInfo", username);
+		model.addAttribute("message", "Thank you for your input");
+		return controller.viewAllSongs(username, model);
+	}
+	
+	@GetMapping("/viewReviews")
+	public String viewReviews(@RequestParam("userInfo") String username, Model model) {
+		List<User> user = repoU.findByUsername(username);
+		if(user.get(0).isDev() == false) {
+			model.addAttribute("message", "You do not have access to this page");
+			return controller.viewAllSongs(username, model);
+		}
+		if(repoR.findAll().isEmpty()) {
+			model.addAttribute("message", "No Available Reviews");
+			return controller.viewAllSongs(username, model);
+		}
+		model.addAttribute("reviews", repoR.findAll());
+		model.addAttribute("userInfo", username);
+		return "devView";
+	}
+	
+	@GetMapping("/deleteReview/{id}/{userInfo}")
+	public String deleteReview(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
+		Review r = repoR.findById(id).orElse(null);
+		repoR.delete(r);
+		model.addAttribute("userInfo", username);
+		return viewReviews(username, model);
 	}
 
 

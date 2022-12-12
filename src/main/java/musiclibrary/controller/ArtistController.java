@@ -29,8 +29,6 @@ public class ArtistController {
 	
 	@Autowired
 	SongRepository repo;
-	
-	
 
 	//Artist
 	

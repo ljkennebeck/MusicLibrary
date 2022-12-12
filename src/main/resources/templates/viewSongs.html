@@ -10,6 +10,7 @@
 <body>
 <div id="container">
 	<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+	<th th:text="${message}"></th><br>
 	--- Search For Song ---<br>
 	<form th:action="@{/searchForSong}" id="border">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -20,7 +21,7 @@
 	</form>
 	--- List of Songs ---<br>
 	<form name="songList" id="border" >
-		<tr th:each="currentSong : ${songs}">
+		<tr th:each="currentSong: ${songs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
 			<td th:text="${currentSong.artist}" />
@@ -59,6 +60,14 @@
 	<form th:action="@{/viewAllGenres}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
+	</form>
+	<form th:action="@{/addReview}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Submit a Review" /><br>
+	</form>
+	<form th:action="@{/viewReviews}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Dev View" /><br>
 	</form>
 	</div>
 	<a href="/redirectSignIn">Sign Out</a>

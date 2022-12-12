@@ -1,39 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="ISO-8859-1">
-<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+	<meta charset="ISO-8859-1">
+	<title>View Songs</title>
+	<link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
 	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
-<title>Artists</title>
+	
 </head>
 <body>
 <div id="container">
-	<h1>=== User <th th:text="${userInfo}"></th>===</h1><br>
-	<h2>--- Search For Artist ---</h2><br>
-	<form id="border" th:action="@{/searchForArtist}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		Name: <input name="artistName" size="20"><br>
-		<input name="submit" type="submit" value="Submit" />
-	</form>
-	--- List of Artists ---<br>
-	<form id="border">
-		<tr th:each="currentArtist: ${artists}">
-			<td th:text="${currentArtist.artistName}" />
+	<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+	--- Reviews ---<br>
+	<form name="reviewList" id="border" >
+		<tr th:each="currentReview: ${reviews}">
+			<td th:text="${currentReview.user}" />
 			<td> --- </td>
-			<td th:text="${currentArtist.bio}" />
+			<td th:text="${currentReview.title}" />
 			<td> | </td>
-			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
-			<td> | </td>
-			<td><a th:href="@{/editArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Edit</a></td>
-			<td> | </td>
-			<td><a th:href="@{/deleteArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Delete</a></td>
-			<td> | </td>
-			<br>
+			<td><a th:href="@{/deleteReview/{id}/{userInfo}(id=${currentReview.id}, userInfo=${userInfo})}">Delete Review</a></td><br>
+			<td th:text="${currentReview.message}" />
+			<br><br>
 		</tr>
-	</form>
-	<form th:action="@{/newArtist}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add an Artist" /><br>
 	</form>
 	<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
@@ -59,7 +46,12 @@
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
 		<input name="submit" type="submit" value="View Genres" /><br>
 	</form>
+	<form th:action="@{/addReview}">
+		<input name="userInfo" type="hidden" th:value="${userInfo}" />
+		<input name="submit" type="submit" value="Submit a Review" /><br>
+	</form>
 	</div>
 	<a href="/redirectSignIn">Sign Out</a>
+
 </body>
 </html>

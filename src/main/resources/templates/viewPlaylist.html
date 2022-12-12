@@ -12,7 +12,7 @@
 <form id="border" th:object="${viewPlaylist}" th:action="@{/viewPlaylist/{id}/{userInfo}(id=${viewPlaylist.id}, userInfo=${userInfo})}" method='POST'>
 	<h2 th:text="${viewPlaylist.playlistName}" ></h2>
 </form>
-<form id="border">
+	<form id="border">
 		<tr th:each="currentSong: ${playlistSongs}">
 			<td th:text="${currentSong.title}" />
 			<td> --- </td>
@@ -20,8 +20,8 @@
 			<td> --- </td>
 			<td th:text="${currentSong.genre}" />
 			<td> | </td>
+			<td></td>
 			<br>
-	
 		</tr>
 	</form>
 	<form th:action="@{/addSong}">

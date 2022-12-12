@@ -1,39 +1,20 @@
 <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 <html>
 <head>
 <meta charset="ISO-8859-1">
+<title>Input Review</title>
 <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
 	<link th:href="@{/styles/musicLibraryStyle.css}" rel="stylesheet" />
-<title>Artists</title>
 </head>
 <body>
 <div id="container">
-	<h1>=== User <th th:text="${userInfo}"></th>===</h1><br>
-	<h2>--- Search For Artist ---</h2><br>
-	<form id="border" th:action="@{/searchForArtist}">
+	<h1>=== User <th th:text="${userInfo}"></th> ===</h1><br>
+	<form id="border" th:object="${newReview}" th:action="@{/postReview/{id}/(id=${newReview.id})}" method='POST'>
+		Title: <input name="title" size="20" th:field="*{title}"><br>
+		Message: <input name="artist" size="100" th:field="*{message}"><br>
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		Name: <input name="artistName" size="20"><br>
 		<input name="submit" type="submit" value="Submit" />
-	</form>
-	--- List of Artists ---<br>
-	<form id="border">
-		<tr th:each="currentArtist: ${artists}">
-			<td th:text="${currentArtist.artistName}" />
-			<td> --- </td>
-			<td th:text="${currentArtist.bio}" />
-			<td> | </td>
-			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
-			<td> | </td>
-			<td><a th:href="@{/editArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Edit</a></td>
-			<td> | </td>
-			<td><a th:href="@{/deleteArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Delete</a></td>
-			<td> | </td>
-			<br>
-		</tr>
-	</form>
-	<form th:action="@{/newArtist}">
-		<input name="userInfo" type="hidden" th:value="${userInfo}" />
-		<input name="submit" type="submit" value="Add an Artist" /><br>
 	</form>
 	<form th:action="@{/addSong}">
 		<input name="userInfo" type="hidden" th:value="${userInfo}" />

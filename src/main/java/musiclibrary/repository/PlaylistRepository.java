@@ -14,5 +14,7 @@ import musiclibrary.beans.Playlist;
 public interface PlaylistRepository extends JpaRepository<Playlist, Long> {
 	
 	List<Playlist> findByPlaylistName(String playlistName);
+	
+	List<Playlist> findByUser(String username);
 
 }

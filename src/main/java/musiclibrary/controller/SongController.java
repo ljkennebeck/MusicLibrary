@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import musiclibrary.beans.Playlist;
+import musiclibrary.beans.Review;
 import musiclibrary.beans.Song;
 import musiclibrary.repository.ArtistRepository;
 import musiclibrary.repository.GenreRepository;
 import musiclibrary.repository.PlaylistRepository;
+import musiclibrary.repository.ReviewRepository;
 import musiclibrary.repository.SongRepository;
 
 /**
@@ -68,7 +70,15 @@ public class SongController {
 	}
 	
 	@PostMapping("/updateSong/{id}")
-	public String updateSong(@RequestParam("userInfo") String username, Song s, Model model) {
+	public String updateSong(@RequestParam("userInfo") String username, @RequestParam("artist") String artist, @RequestParam("genre") String genre, Song s, Model model) {
+		if(repoA.findByArtistName(artist).isEmpty()) {
+			model.addAttribute("message", "Entered Artist does not exist");
+			return viewAllSongs(username, model);
+		}
+		if(repoG.findByGenreName(genre).isEmpty()) {
+			model.addAttribute("message", "Entered Genre does not exist");
+			return viewAllSongs(username, model);
+		}
 		repo.save(s);
 		model.addAttribute("userInfo", username);
 		return viewAllSongs(username, model);
@@ -81,6 +91,7 @@ public class SongController {
 		model.addAttribute("userInfo", username);
 		return viewAllSongs(username, model);
 	}
+	
 	@GetMapping("/addToPlaylist/{id}/{userInfo}/{playlistId}")
 	public String addSongToPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, @PathVariable(name = "playlistId") long playlistId, Model model) {
 		Playlist p = repoP.findById(playlistId).orElse(null);
@@ -100,10 +111,10 @@ public class SongController {
 	
 	@GetMapping("/selectPlaylist/{id}/{userInfo}") 
 	public String SelectPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
-		if(repoP.findAll().isEmpty()) {
+		if(repoP.findByUser(username).isEmpty()) {
 			return "viewAllSongs";
 		}
-		model.addAttribute("playlists", repoP.findAll());
+		model.addAttribute("playlists", repoP.findByUser(username));
 		model.addAttribute("userInfo", username);
 		model.addAttribute("id", id);
 		return "playlistSelect";
@@ -151,7 +162,5 @@ public class SongController {
 		model.addAttribute("userInfo", username);
 		return path;
 	}
-	
-
 
 }

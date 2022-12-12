@@ -52,7 +52,7 @@ public class GenreController {
 	
 	@GetMapping("/viewAllGenres") 
 	public String viewAllGenres(@RequestParam("userInfo") String username, Model model) {
-		if(repoA.findAll().isEmpty()) {
+		if(repoG.findAll().isEmpty()) {
 			return addNewGenre(username, model);
 		}
 		model.addAttribute("genres", repoG.findAll());

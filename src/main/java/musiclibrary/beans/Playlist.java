@@ -38,10 +38,15 @@ public class Playlist {
 	@Id
 	@GeneratedValue
 	private long id;
+	private String user;
 	private String playlistName;
 	private ArrayList<Song> songs;
 	
-	
+	public Playlist() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public Playlist(String playlistName, ArrayList<Song> songs) {
 		super();
 		this.playlistName = playlistName;
@@ -60,5 +65,44 @@ public class Playlist {
 		songs.add(s);
 		
 	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getPlaylistName() {
+		return playlistName;
+	}
+
+	public void setPlaylistName(String playlistName) {
+		this.playlistName = playlistName;
+	}
+
+	public ArrayList<Song> getSongs() {
+		return songs;
+	}
+
+	public void setSongs(ArrayList<Song> songs) {
+		this.songs = songs;
+	}
+
+	public String getUser() {
+		return user;
+	}
+
+	public void setUser(String user) {
+		this.user = user;
+	}
+	
+	
+
+	
+	
+	
+	
 
 }

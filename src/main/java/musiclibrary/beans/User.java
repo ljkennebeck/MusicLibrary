@@ -30,10 +30,14 @@ public class User {
 	private int id;
 	private String username;
 	private String password;
+	private boolean isDev;
 	@Autowired
 	@OneToMany(targetEntity=Playlist.class)
 	private List<Playlist> playlists;
 	
+	public User() {
+		super();
+	}
 	
 	public User(String username, String password) {
 		super();
@@ -46,5 +50,49 @@ public class User {
 		this.password = password;
 		this.playlists = playlists;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public List<Playlist> getPlaylists() {
+		return playlists;
+	}
+
+	public void setPlaylists(List<Playlist> playlists) {
+		this.playlists = playlists;
+	}
+
+	public boolean isDev() {
+		return isDev;
+	}
+
+	public void setDev(boolean isDev) {
+		this.isDev = isDev;
+	}
+	
+	
+	
+	
 	
 }
