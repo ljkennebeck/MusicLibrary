@@ -6,6 +6,8 @@
 package musiclibrary.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -83,7 +85,7 @@ public class PlaylistController {
 	@GetMapping("/viewPlaylist/{id}/{userInfo}") 
 	public String viewPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, Model model) {
 		Playlist p = repoP.findById(id).orElse(null);
-		ArrayList<Song> songs = p.getSongs();
+		List<Song> songs = p.getSongs();
 		model.addAttribute("viewPlaylist", p);
 		model.addAttribute("playlistSongs", songs);
 		model.addAttribute("userInfo", username);

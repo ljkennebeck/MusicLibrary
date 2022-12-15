@@ -10,6 +10,7 @@ import javax.persistence.Embeddable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -40,21 +41,14 @@ public class Playlist {
 	private long id;
 	private String user;
 	private String playlistName;
-	private ArrayList<Song> songs;
+	@OneToMany
+	private List<Song> songs;
 
 	/**
 	 * @param s
 	 */
 	public void addToPlaylist(Song s) {
 		songs.add(s);
-		
 	}
-	
-	
-
-	
-	
-	
-	
 
 }

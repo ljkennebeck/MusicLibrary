@@ -35,7 +35,7 @@ import lombok.ToString;
 @ToString
 @Getter
 @Setter
-public class Song{
+public class Song implements Serializable{
 	
 	// Variables
 	@Id
@@ -48,7 +48,5 @@ public class Song{
 	private String artist;
 	@Column(name="GENRE")
 	private String genre;
-	public long getId() {
-		return id;
-	}
+
 }

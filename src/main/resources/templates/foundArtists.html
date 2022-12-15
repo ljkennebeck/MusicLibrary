@@ -17,9 +17,9 @@
 			<td> | </td>
 			<td><a th:href="@{/viewArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">View</a></td>
 			<td> | </td>
-			<td><a th:href="@{/editArtist/{id}(id=${currentArtist.id})}">Edit</a></td>
+			<td><a th:href="@{/editArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Edit</a></td>
 			<td> | </td>
-			<td><a th:href="@{/deleteArtist/{id}(id=${currentArtist.id})}">Delete</a></td><br>
+			<td><a th:href="@{/deleteArtist/{id}/{userInfo}(id=${currentArtist.id}, userInfo=${userInfo})}">Delete</a></td><br>
 		</tr>
 	</form><br>
 <form th:action="@{/addSong}">

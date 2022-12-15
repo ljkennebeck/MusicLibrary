@@ -96,8 +96,9 @@ public class SongController {
 	public String addSongToPlaylist(@PathVariable("userInfo") String username, @PathVariable("id") long id, @PathVariable(name = "playlistId") long playlistId, Model model) {
 		Playlist p = repoP.findById(playlistId).orElse(null);
 		Song s = repo.findById(id).orElse(null);
-		ArrayList<Song> playlistSongs = new ArrayList<Song>();
-		if(p.getSongs() == null) {
+		List<Song> playlistSongs = new ArrayList<Song>();
+		List<Song> songs = p.getSongs();
+		if(songs.isEmpty()) {
 			playlistSongs.add(s);
 			p.setSongs(playlistSongs);
 			repoP.save(p);
